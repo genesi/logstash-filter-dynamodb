@@ -67,6 +67,7 @@ end
     doc = JSON.parse(event['message'], :symbolize_names => true)
 
     event['eventName'] = doc[:eventName]
+    event['eventParser'] = doc[:eventParser]
 
     keys = {}
     doc[:dynamodb][:keys].each do |key, value|
