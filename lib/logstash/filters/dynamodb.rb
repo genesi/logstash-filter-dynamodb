@@ -2,12 +2,10 @@
 require "logstash/filters/base"
 require "logstash/namespace"
 require 'bigdecimal'
-require 'stringio'
 require 'set'
 require 'json'
 
 require 'bigdecimal'
-require 'stringio'
 require 'set'
 require 'json'
 
@@ -25,12 +23,12 @@ class Unmarshaler
     when :l then value.map { |v| format(v) }
     when :s then value
     when :n then BigDecimal.new(value)
-    when :b then StringIO.new(value)
+    when :b then String.new(value)
     when :null then nil
     when :bool then value
     when :ss then Array.new(value)
     when :ns then Array.new(value.map { |n| BigDecimal.new(n) })
-    when :bs then Array.new(value.map { |b| StringIO.new(b) })
+    when :bs then Array.new(value.map { |b| String.new(b) })
     else
       raise ArgumentError, "unhandled type #{type.inspect}"
     end
